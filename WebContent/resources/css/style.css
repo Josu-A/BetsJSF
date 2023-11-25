@@ -1,10 +1,14 @@
 * {
     box-sizing: border-box;
+    --text-color: hsl(0, 0%, 88%);
+    --widget-bg: hsl(0, 0%, 20%);
+    --widget-bg-header: hsl(0, 0%, 16%);
+    --widget-bg-header-sec: hsl(0, 0%, 18%);
 }
 
 body {
     background-color: hsl(0, 0%, 14%);
-    color: hsl(0, 0%, 88%);
+    color: var(--text-color);
 }
 .container {
     align-items: center;
@@ -32,8 +36,16 @@ h1 {
     grid-column: span 2;
 }
 
+.grid-query-question > div {
+    width: 100%;
+}
+
+[id="nireForm:mezuak"] {
+    color: red;
+}
+
 input[type="submit"] {
-    background-color: hsl(0, 0%, 20%);
+    background-color: var(--widget-bg);
     border: none;
     color: inherit;
     font-size: 1.4em;
@@ -44,4 +56,30 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: hsl(0, 0%, 30%);
     cursor: pointer;
+}
+
+.ui-widget-content {
+    background-color: var(--widget-bg);
+    color: var(--text-color);
+}
+
+.ui-widget-header {
+    color: var(--text-color);
+}
+
+.ui-datepicker .ui-datepicker-header, .ui-datatable-header {
+    background: var(--widget-bg-header);
+}
+
+.ui-state-default {
+    background: var(--widget-bg-header-sec);
+    color: var(--text-color);
+}
+
+.ui-datepicker .ui-datepicker-calendar .ui-state-default {
+    color: hsl(210, 100%, 90%);
+}
+
+.ui-datepicker .ui-datepicker-calendar .ui-state-hover {
+    color: hsl(210, 100%, 80%);
 }
