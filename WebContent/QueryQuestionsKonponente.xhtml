@@ -11,18 +11,39 @@
     <h:form id="nireForm">
         <div>
             <p:calendar id="data" value="#{Main.data}" navigator="false" mode="inline">
-                <p:ajax event="dateSelect" listener="#{Main.onDateSelect}" update="mezuak" />
+                <p:ajax event="dateSelect" listener="#{Main.onDateSelect}" update="mezuak gertaerakTaula galderakTaula" />
             </p:calendar>
         </div>
         <div>
-            <p:dataTable id="taulaPF" value="#{Main.gertaerak}" var="item"
+            <p:dataTable id="gertaerakTaula" value="#{Main.gertaerak}" var="gertaera"
                     selectionMode="single" selection="#{Main.gertaera}"
-                    border="1" rowKey="#{item.eventNumber}">
+                    border="1" rowKey="#{gertaera.eventNumber}"
+                    emptyMessage="#{Main.getBundleString('NoEvents')}">
                 <p:ajax event="rowSelect" listener="#{Main.onGertaeraSelect}"
-                        update=":nireForm:mezuak" />
+                        update=":nireForm:mezuak :nireForm:galderakTaula" />
                 <f:facet name="header">Events</f:facet>
-                <p:column headerText="Event#">#{item.eventNumber}</p:column>
-                <p:column headerText="Event">#{item.description}</p:column>
+                <p:column headerText="Event#">
+                    <h:outputText value="#{gertaera.eventNumber}" />
+                </p:column>
+                <p:column headerText="Event">
+                    <h:outputText value="#{gertaera.description}" />
+                </p:column>
+            </p:dataTable>
+        </div>
+        <div>
+            <p:dataTable id="galderakTaula" value="#{Main.galderak}" var="galdera"
+                    selectionMode="single" selection="#{Main.galdera}"
+                    border="1" rowKey="#{galdera.questionNumber}"
+                    emptyMessage="#{Main.getBundleString('NoQueries')}">
+                <p:ajax event="rowSelect" listener="#{Main.onGalderaSelect}"
+                        update=":nireForm:mezuak" />
+                <f:facet name="header">Queries</f:facet>
+                <p:column headerText="Query#">
+                    <h:outputText value="#{galdera.questionNumber}" />
+                </p:column>
+                <p:column headerText="Query">
+                    <h:outputText value="#{galdera.question}" />
+                </p:column>
             </p:dataTable>
         </div>
         <div>
