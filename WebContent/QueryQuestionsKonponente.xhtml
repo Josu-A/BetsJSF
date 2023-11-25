@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xml:lang="eu">
+<ui:composition>
+<f:view>
+    <h:form id="nireForm">
+        <div>
+            <p:calendar id="data" value="#{Main.data}" navigator="false" mode="inline">
+                <p:ajax event="dateSelect" listener="#{Main.onDateSelect}" update="mezuak" />
+            </p:calendar>
+        </div>
+        <div>
+            <p:dataTable id="taulaPF" value="#{Main.gertaerak}" var="item"
+                    selectionMode="single" selection="#{Main.gertaera}"
+                    border="1" rowKey="#{item.eventNumber}">
+                <p:ajax event="rowSelect" listener="#{Main.onGertaeraSelect}"
+                        update=":nireForm:mezuak" />
+                <f:facet name="header">Events</f:facet>
+                <p:column headerText="Event#">#{item.eventNumber}</p:column>
+                <p:column headerText="Event">#{item.description}</p:column>
+            </p:dataTable>
+        </div>
+        <div>
+            <h:messages id="mezuak" style="color:blue" />
+        </div>
+    </h:form>
+</f:view>
+</ui:composition>
+</html>
