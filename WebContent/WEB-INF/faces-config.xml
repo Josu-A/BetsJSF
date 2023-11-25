@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <faces-config
-    xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    xmlns="https://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
     version="2.0">
     <managed-bean>
         <managed-bean-name>Main</managed-bean-name>
@@ -11,14 +11,18 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <navigation-rule>
-        <display-name>Main.xhtml</display-name>
+        <display-name>CreateQuestions</display-name>
         <from-view-id>/Main.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>create-questions</from-outcome>
+            <from-outcome>createQuestions</from-outcome>
             <to-view-id>/CreateQuestions.xhtml</to-view-id>
         </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <display-name>QueryQuestions</display-name>
+        <from-view-id>/Main.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>query-questions</from-outcome>
+            <from-outcome>queryQuestions</from-outcome>
             <to-view-id>/QueryQuestions.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
