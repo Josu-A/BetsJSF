@@ -9,15 +9,17 @@
 <ui:composition>
 <f:view>
     <h:form id="nireForm">
-	    <div>
-	        <h:commandButton value="#{Main.getBundleString('CreateQuery')}" action="createQuestions" />
-	    </div>
-	    <div>
-	        <h:commandButton value="#{Main.getBundleString('QueryQueries')}" action="queryQuestions" />
-	    </div>
-	    <div>
-	        <h:messages id="mezuak" style="color:blue" />
-	    </div>
+        <div class="grid-container">
+	        <div>
+	            <h:commandButton value="#{Main.getBundleString('CreateQuery')}" action="createQuestions" />
+	        </div>
+	        <div>
+	            <h:commandButton value="#{Main.getBundleString('QueryQueries')}" action="queryQuestions" />
+	        </div>
+	        <div class="mezuak">
+	            <h:messages id="mezuak" style="color:blue" />
+	        </div>
+        </div>
     </h:form>
 </f:view>
 </ui:composition>
