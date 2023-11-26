@@ -11,15 +11,15 @@
     <h:outputStylesheet library="css" name="style.css" />
     <script>
         function egunakPintatu(eguna) {
-        	const egunak = #{Main.egunak};
-        	var mycss = '';
-        	console.log(eguna);
-        	var dataString = eguna.getFullYear().toString()
-        	        + '-' + (eguna.getMonth() + 1).toString()
-        	        + '-' + eguna.getDate().toString();
-	        console.log(dataString);
-        	for (var i = 0; i &lt; egunak.length; i++) {
-        		if (dataString == egunak[i]) {
+            const egunak = #{Main.egunak};
+            var mycss = '';
+            console.log(eguna);
+            var dataString = eguna.getFullYear().toString()
+                    + '-' + (eguna.getMonth() + 1).toString()
+                    + '-' + eguna.getDate().toString();
+            console.log(dataString);
+            for (var i = 0; i &lt; egunak.length; i++) {
+                if (dataString == egunak[i]) {
                     mycss = 'gertaeradun-eguna';
                 }
             }
@@ -29,11 +29,11 @@
 </h:head>
 <h:body>
     <div class="container">
-	    <h1>
-	        BetsJSF
-	    </h1>
-	    <ui:insert name="gorputza">
-	        Eraikitzen...
+        <h1>
+            BetsJSF
+        </h1>
+        <ui:insert name="gorputza">
+            Eraikitzen...
         </ui:insert>
     </div>
 </h:body>
