@@ -87,3 +87,9 @@ input[type="submit"]:hover {
 .gertaeradun-eguna > a {
     color: red!important;
 }
+
+.back-button {
+    display: block;
+    margin-inline: auto;
+    margin-top: 1em;
+}

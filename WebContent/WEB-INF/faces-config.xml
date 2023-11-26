@@ -11,19 +11,23 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <navigation-rule>
-        <display-name>CreateQuestions</display-name>
+        <display-name>Main</display-name>
         <from-view-id>/Main.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>createQuestions</from-outcome>
             <to-view-id>/CreateQuestions.xhtml</to-view-id>
         </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <display-name>QueryQuestions</display-name>
-        <from-view-id>/Main.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>queryQuestions</from-outcome>
             <to-view-id>/QueryQuestions.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <display-name>QueryQuestions</display-name>
+        <from-view-id>/QueryQuestions.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>main</from-outcome>
+            <to-view-id>/Main.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>
