@@ -8,15 +8,20 @@ import java.util.Vector;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import org.primefaces.event.SelectEvent;
 
 import businessLogic.BLFacade;
 import domain.Event;
 import domain.Question;
+import exceptions.EventFinished;
+import exceptions.QuestionAlreadyExist;
 
 public class MainBean {
     
+	private String galderaIzena;
+	private float apostuMin;
     private BLFacade facadeBL;
     private Date data;
     private Event gertaera;
@@ -30,6 +35,32 @@ public class MainBean {
         gertaerak = this.facadeBL.getEvents(this.data);
         egunak = this.getEventsMonthStringArray();
         System.out.println(egunak);
+    }
+    
+    public String galderaSortu() {
+    	try {
+			Question g = this.facadeBL.createQuestion(this.gertaera, this.galderaIzena, this.apostuMin);
+	        gertaerak = this.facadeBL.getEvents(this.data);
+    		FacesContext.getCurrentInstance().addMessage(null,
+    				new FacesMessage("Galdera '" + g.getQuestion() + "/" + g.getBetMinimum() + "' ondo sortua"));
+		}
+    	catch (EventFinished | QuestionAlreadyExist e) {
+    		e.printStackTrace();
+    		FacesContext.getCurrentInstance().addMessage(null,
+    				new FacesMessage(e.getMessage()));
+    	}
+    	return null;
+    }
+    
+    public void gertaeraListListener(AjaxBehaviorEvent event) {
+    	FacesContext.getCurrentInstance().addMessage(null,
+    			new FacesMessage("Aukeratutako gertaera: "
+    					+ this.gertaera.getEventNumber() + "/"
+    					+ this.gertaera.getDescription()));
+    }
+    
+    public float getApostuMin() {
+    	return this.apostuMin;
     }
     
     public String getBundleString(String name) {
@@ -61,6 +92,10 @@ public class MainBean {
     
     public Question getGaldera() {
         return this.galdera;
+    }
+    
+    public String getGalderaIzena() {
+    	return this.galderaIzena;
     }
     
     public Event getGertaera() {
@@ -114,12 +149,20 @@ public class MainBean {
         this.resetGalderaSelection();
     }
     
+    public void setApostuMin(float apostuMin) {
+    	this.apostuMin = apostuMin;
+    }
+    
     public void setData(Date data) {
         this.data = data;
     }
     
     public void setGaldera(Question galdera) {
         this.galdera = galdera;
+    }
+    
+    public void setGalderaIzena(String galderaIzena) {
+    	this.galderaIzena = galderaIzena;
     }
     
     public void setGertaera(Event gertaera) {

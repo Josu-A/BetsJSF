@@ -30,4 +30,12 @@
             <to-view-id>/Main.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <display-name>CreateQuestions</display-name>
+        <from-view-id>/CreateQuestions.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>main</from-outcome>
+            <to-view-id>/Main.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

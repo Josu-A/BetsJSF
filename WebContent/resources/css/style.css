@@ -36,7 +36,7 @@ h1 {
     grid-column: span 2;
 }
 
-.grid-query-question > div {
+.grid-query-question > div, .grid-create-question > div {
     width: 100%;
 }
 
@@ -92,4 +92,35 @@ input[type="submit"]:hover {
     display: flex;
     justify-content: space-evenly;
     margin-top: 1em;
+}
+
+.input-container {
+    grid-column: span 2;
+}
+
+.input-container > * {
+    display: inline-block;
+}
+
+.input-container > input {
+    width: 80%;
+}
+
+form select {
+    width: inherit;
+}
+
+.input-container > input, form select, .input-container > label {
+    font-size: 1.4rem;
+}
+
+.input-container > input, form select {
+    background-color: var(--widget-bg);
+    color: var(--text-color);
+    border: none;
+    box-shadow: 0 0 4px 2px rgba(255, 255, 255, 0.9);
+}
+
+.input-container > label {
+    width: 20%;
 }

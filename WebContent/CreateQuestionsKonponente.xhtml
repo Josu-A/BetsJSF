@@ -8,12 +8,49 @@
     xml:lang="eu">
 <ui:composition>
 <f:view>
-    <div>
-        <h:commandButton value="Create Questions" action="create-questions" />
-    </div>
-    <div>
-        <h:commandButton value="Query Questions" action="query-questions" />
-    </div>
+    <h:form id="nireForm">
+        <div class="grid-container grid-create-question">
+            <div>
+                <p:calendar id="data" value="#{Main.data}" navigator="false" mode="inline"
+                       beforeShowDay="egunakPintatu">
+                    <p:ajax event="dateSelect" listener="#{Main.onDateSelect}" update="mezuak gertaeraZerrenda" />
+                </p:calendar>
+            </div>
+            <div>
+                <h:selectOneMenu id="gertaeraZerrenda" value="#{Main.gertaera}"
+                    required="true" requiredMessage="Gertaera bat aukeratu behar da.">
+                    <f:converter converterId="omnifaces.SelectItemsConverter" />
+                    <f:selectItems value="#{Main.gertaerak}" />
+                    <f:ajax event="change" listener="#{Main.gertaeraListListener}"
+                            render="mezuak" />
+                </h:selectOneMenu>
+            </div>
+            <div class="input-container" style="margin-top: 2em;">
+                <label for="galdera">Question</label>
+                <h:inputText id="galdera" value="#{Main.galderaIzena}" required="true"
+                        requiredMessage="Galderak gutxienez karaktere bat behar du.">
+                    <f:ajax execute="galdera" render="mezuak" />
+                </h:inputText>
+            </div>
+            <div class="input-container">
+                <label for="apostu-min">Min Bet</label>
+                <h:inputText id="apostu-min" value="#{Main.apostuMin}" required="true"
+                        converterMessage="Zenbaki erreal bat idatzi."
+                        requiredMessage="Zenbaki erreal bat idatzi.">
+                    <f:validateDoubleRange minimum="0.0"/>
+                    <f:ajax execute="apostu-min" render="mezuak" />
+                </h:inputText>
+            </div>
+            <div class="mezuak">
+                <h:messages id="mezuak" />
+            </div>
+        </div>
+        <div class="back-buttons">
+            <h:commandButton value="#{Main.getBundleString('CreateQuery')}" action="#{Main.galderaSortu}" />
+            <h:commandButton value="#{Main.getBundleString('Close')}" action="main"
+                    immediate="true"/>
+        </div>
+    </h:form>
 </f:view>
 </ui:composition>
 </html>
