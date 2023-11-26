@@ -11,7 +11,8 @@
     <h:form id="nireForm">
         <div class="grid-container grid-query-question">
             <div>
-	            <p:calendar id="data" value="#{Main.data}" navigator="false" mode="inline">
+	            <p:calendar id="data" value="#{Main.data}" navigator="false" mode="inline"
+	                   beforeShowDay="egunakPintatu">
 	                <p:ajax event="dateSelect" listener="#{Main.onDateSelect}" update="mezuak gertaerakTaula galderakTaula" />
 	            </p:calendar>
 	        </div>

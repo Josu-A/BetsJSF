@@ -83,3 +83,7 @@ input[type="submit"]:hover {
 .ui-datepicker .ui-datepicker-calendar .ui-state-hover {
     color: hsl(210, 100%, 80%);
 }
+
+.gertaeradun-eguna > a {
+    color: red!important;
+}
