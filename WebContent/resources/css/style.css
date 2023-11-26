@@ -88,8 +88,8 @@ input[type="submit"]:hover {
     color: red!important;
 }
 
-.back-button {
-    display: block;
-    margin-inline: auto;
+.back-buttons {
+    display: flex;
+    justify-content: space-evenly;
     margin-top: 1em;
 }
