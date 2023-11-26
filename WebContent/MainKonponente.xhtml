@@ -11,10 +11,12 @@
     <h:form id="nireForm">
         <div class="grid-container">
             <div>
-                <h:commandButton value="#{Main.getBundleString('CreateQuery')}" action="createQuestions" />
+                <h:commandButton value="#{Main.getBundleString('CreateQuery')}"
+                        action="createQuestions" immediate="true"/>
             </div>
             <div>
-                <h:commandButton value="#{Main.getBundleString('QueryQueries')}" action="queryQuestions" />
+                <h:commandButton value="#{Main.getBundleString('QueryQueries')}"
+                        action="queryQuestions" immediate="true" />
             </div>
             <div class="mezuak">
                 <h:messages id="mezuak" />
