@@ -4,10 +4,11 @@
 
 # Compiled class file
 *.class
-build/classes/eredua/
+build/classes/
 
 # Log file
 *.log
+*.log.*
 
 # BlueJ files
 *.ctxt
