@@ -1,6 +1,7 @@
 package nagusia;
 
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 
 import org.hibernate.HibernateException;
@@ -50,8 +51,30 @@ public class GertaerakDataAccess {
         return e;
     }
     
+    public List<Erabiltzailea> getErabiltzaileak() {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        
+        List<Erabiltzailea> result = HibernateUtil.castList(Erabiltzailea.class,
+                session.createQuery("SELECT e FROM Erabiltzailea e").list());
+        
+        session.getTransaction().commit();
+        return result;
+    }
+    
+    public List<LoginGertaera> getLoginGertaerak() {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        
+        List<LoginGertaera> result = HibernateUtil.castList(LoginGertaera.class,
+                session.createQuery("SELECT lg FROM LoginGertaera lg").list());
+        
+        session.getTransaction().commit();
+        return result;
+    }
+    
     public static void main(String[] args) {
-        GertaerakDataAccess e = new GertaerakDataAccess ();
+        GertaerakDataAccess e = new GertaerakDataAccess();
         
         BetsLogger.log(Level.INFO, "Gertaeren sorkuntza:");
         e.createAndStoreErabiltzailea("Ane", "125", "ikaslea");
@@ -61,5 +84,11 @@ public class GertaerakDataAccess {
         e.createAndStoreErabiltzailea("Kepa", "126", "ikaslea");
         e.createAndStoreLoginGertaera("Kepa",true, new Date());
         e.createAndStoreLoginGertaera("Kepa",false, new Date());
+        
+        List<Erabiltzailea> erabiltzaileak = e.getErabiltzaileak();
+        BetsLogger.log(Level.INFO, () -> String.format("3.1 => Erabiltzaileak: %s", erabiltzaileak.toString()));
+        
+        List<LoginGertaera> loginGertaerak = e.getLoginGertaerak();
+        BetsLogger.log(Level.INFO, () -> String.format("3.1 => Login Gertaerak: %s", loginGertaerak.toString()));
     }
 }

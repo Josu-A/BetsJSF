@@ -2,6 +2,7 @@ package eredua.domeinua;
 
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,10 +13,10 @@ public class LoginGertaera {
     
     private Date data;
     private String deskribapena;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Erabiltzailea erabiltzailea;
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private boolean login;
     
