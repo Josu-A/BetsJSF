@@ -1,4 +1,4 @@
-name: Build
+name: SonarCloud Analysis
 on:
     push:
         branches:
@@ -7,13 +7,20 @@ on:
         types: [opened, synchronize, reopened]
 jobs:
     sonarcloud:
-        name: SonarCloud
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout rep
-              uses: actions/checkout@v3
+            - name: Checkout code
+              uses: actions/checkout@v2
               with:
                   fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+            - name: Set up JDK
+              uses: actions/setup-java@v2
+              with:
+                  distribution: 'adopt'
+                  java-version: '11'
+            - name: Build
+              run: |
+                javac -cp "lib/*:!lib/mysql/mysql-connector-java-5.1.15-bin.jar" -d build/classes src/**/*.java
             - name: SonarCloud Scan
               uses: SonarSource/sonarcloud-github-action@master
               env:
