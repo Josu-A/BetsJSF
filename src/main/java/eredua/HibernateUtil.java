@@ -1,6 +1,9 @@
 package eredua;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
@@ -24,6 +27,14 @@ public class HibernateUtil {
 			return null;
 		}
 	}
+	
+	public static <T> List<T> castList(Class<? extends T> clazz, Collection<?> c) {
+        List<T> r = new ArrayList<>(c.size());
+        for (Object o : c) {
+            r.add(clazz.cast(o));
+        }
+        return r;
+    }
 	
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;

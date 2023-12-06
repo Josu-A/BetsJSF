@@ -1,7 +1,5 @@
 package nagusia;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,14 +17,6 @@ public class GertaerakSortu {
 
     public GertaerakSortu() {
         // Empty constructor
-    }
-    
-    private static <T> List<T> castList(Class<? extends T> clazz, Collection<?> c) {
-        List<T> r = new ArrayList<>(c.size());
-        for (Object o : c) {
-            r.add(clazz.cast(o));
-        }
-        return r;
     }
     
     private void createAndStoreErabiltzailea(String izena, String pasahitza, String mota) {
@@ -48,7 +38,7 @@ public class GertaerakSortu {
         
         Query q = session.createQuery("SELECT e FROM Erabiltzailea e WHERE izena= :erabiltzailea");
         q.setParameter("erabiltzailea", erabiltzailea);
-        List<Erabiltzailea> result = castList(Erabiltzailea.class, q.list());
+        List<Erabiltzailea> result = HibernateUtil.castList(Erabiltzailea.class, q.list());
         
         LoginGertaera e = new LoginGertaera();
         try {
@@ -69,7 +59,7 @@ public class GertaerakSortu {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         
-        List<LoginGertaera> result = castList(LoginGertaera.class,
+        List<LoginGertaera> result = HibernateUtil.castList(LoginGertaera.class,
                 session.createQuery("SELECT lg FROM LoginGertaera lg").list());
         
         session.getTransaction().commit();
