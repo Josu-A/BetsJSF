@@ -18,6 +18,7 @@ import eredua.domeinua.Erabiltzailea;
 import eredua.domeinua.LoginGertaera;
 
 public class GertaerakSortu {
+
     private static final Logger logger = Logger.getLogger(GertaerakSortu.class.getName());
 
     public GertaerakSortu() {
@@ -91,6 +92,11 @@ public class GertaerakSortu {
         return result;
     }
     
+    public void printObjMemDB(String azalpena, Erabiltzailea e) {
+        logger.log(Level.INFO, () -> String.format("\tMem:<%s> DB:<%s> => %n%s",
+                e, GertaerakBerreskuratuJDBC.getErabiltzaileaJDBC(e), azalpena));
+    }
+    
     public static void main(String[] args) {
         GertaerakSortu e = new GertaerakSortu();
         logger.log(Level.INFO, "Gertaeren sorkuntza:");
@@ -101,7 +107,7 @@ public class GertaerakSortu {
         List<LoginGertaera> gertaerak = e.gertaerakZerrendatu();
         for (int i = 0; i < gertaerak.size(); i++) {
             LoginGertaera ev = gertaerak.get(i);
-            logger.log(Level.INFO, () -> String.format("Id: %s Deskribapena: %s Data: %s Login: %s",
+            logger.log(Level.INFO, () -> String.format("Id: %s Deskribapena: %s Data: %s Login: %b",
                     ev.getId(), ev.getDeskribapena(), ev.getData(), ev.isLogin()));
         }
     }
