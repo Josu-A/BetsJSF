@@ -4,8 +4,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.classic.Session;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.Query;
 
 import eredua.BetsLogger;
 import eredua.HibernateUtil;
@@ -73,6 +76,45 @@ public class GertaerakDataAccess {
         return result;
     }
     
+    public List<LoginGertaera> getLoginGertaerakv1(String erabiltzaileaIzena) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        
+        Query q = session.createQuery("SELECT lg FROM LoginGertaera lg INNER JOIN " 
+                + "lg.erabiltzailea e WHERE e.izena = :erabiltzaileaIzena");
+        q.setParameter("erabiltzaileaIzena", erabiltzaileaIzena);
+        List<LoginGertaera> result = HibernateUtil.castList(LoginGertaera.class, q.list());
+        
+        session.getTransaction().commit();
+        return result;
+    }
+    
+    public List<LoginGertaera> getLoginGertaerakv2(String erabiltzaileaIzena) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        
+        Query q = session.createQuery("SELECT lg FROM LoginGertaera lg WHERE "
+                + "lg.erabiltzailea.izena = :erabiltzaileaIzena");
+        q.setParameter("erabiltzaileaIzena", erabiltzaileaIzena);
+        List<LoginGertaera> result = HibernateUtil.castList(LoginGertaera.class, q.list());
+        
+        session.getTransaction().commit();
+        return result;
+    }
+    
+    public List<LoginGertaera> getLoginGertaerakv3(String erabiltzaileaIzena) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        
+        Criteria c = session.createCriteria(LoginGertaera.class)
+                .createCriteria("erabiltzailea")
+                .add(Restrictions.eq("izena", erabiltzaileaIzena));
+        List<LoginGertaera> result = HibernateUtil.castList(LoginGertaera.class, c.list());
+        
+        session.getTransaction().commit();
+        return result;
+    }
+    
     public static void main(String[] args) {
         GertaerakDataAccess e = new GertaerakDataAccess();
         
@@ -90,5 +132,20 @@ public class GertaerakDataAccess {
         
         List<LoginGertaera> loginGertaerak = e.getLoginGertaerak();
         BetsLogger.log(Level.INFO, () -> String.format("3.1 => Login Gertaerak: %s", loginGertaerak.toString()));
+        
+        Erabiltzailea erab = loginGertaerak.get(0).getErabiltzailea();
+        BetsLogger.log(Level.INFO, () -> String.format("3.2 => %s", erab));
+        
+        List<LoginGertaera> lg1 = e.getLoginGertaerakv1(erab.getIzena());
+        BetsLogger.log(Level.INFO, () -> String.format("3.3.1 => %sren Login Gertareak: %s",
+                erab.getIzena(), lg1));
+        
+        List<LoginGertaera> lg2 = e.getLoginGertaerakv2(erab.getIzena());
+        BetsLogger.log(Level.INFO, () -> String.format("3.3.2 => %sren Login Gertareak: %s",
+                erab.getIzena(), lg2));
+        
+        List<LoginGertaera> lg3 = e.getLoginGertaerakv3(erab.getIzena());
+        BetsLogger.log(Level.INFO, () -> String.format("3.3.3 => %sren Login Gertareak: %s",
+                erab.getIzena(), lg3));
     }
 }
