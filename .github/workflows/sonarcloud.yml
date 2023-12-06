@@ -20,8 +20,9 @@ jobs:
                   java-version: '11'
             - name: Build
               run: |
+                  LIB_PATH=$(find lib -name "*.jar" -not -path "lib/mysql/mysql-connector-java-5.1.15-bin.jar" -exec printf ":{}" \;)
                   find src -name "*.java" -print > sources.txt
-                  javac -cp "lib/*:!lib/mysql/mysql-connector-java-5.1.15-bin.jar" -d build/classes @sources.txt
+                  javac -cp "build:$LIB_PATH" -d build/classes @sources.txt
             - name: SonarCloud Scan
               uses: SonarSource/sonarcloud-github-action@master
               env:
