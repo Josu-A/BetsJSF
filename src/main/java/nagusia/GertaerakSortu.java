@@ -1,40 +1,24 @@
 package nagusia;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.FileHandler;
 import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 import org.hibernate.classic.Session;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
+import eredua.BetsLogger;
 import eredua.HibernateUtil;
 import eredua.domeinua.Erabiltzailea;
 import eredua.domeinua.LoginGertaera;
 
 public class GertaerakSortu {
 
-    private static final Logger logger = Logger.getLogger(GertaerakSortu.class.getName());
-
     public GertaerakSortu() {
-        try {
-            FileHandler fileHandler = new FileHandler("logs/mylog.log");
-            fileHandler.setFormatter(new SimpleFormatter());
-            logger.addHandler(fileHandler);
-            addShutdownHook(fileHandler);
-        }
-        catch (SecurityException | IOException e) {
-            logger.log(Level.SEVERE, "Error initializing logging", e);
-        }
-    }
-    
-    private static void addShutdownHook(FileHandler fileHandler) {
-        Runtime.getRuntime().addShutdownHook(new Thread(fileHandler::close));
+        // Empty constructor
     }
     
     private static <T> List<T> castList(Class<? extends T> clazz, Collection<?> c) {
@@ -73,8 +57,8 @@ public class GertaerakSortu {
             e.setData(data);
             session.persist(e);
         }
-        catch (IndexOutOfBoundsException ex) {
-            logger.log(Level.SEVERE, () -> String.format(
+        catch (IndexOutOfBoundsException | HibernateException ex) {
+            BetsLogger.log(Level.SEVERE, String.format(
                     "Errorea: erabiltzailea ez da existitzen %s", ex.toString()));
         }
         
@@ -93,21 +77,21 @@ public class GertaerakSortu {
     }
     
     public void printObjMemDB(String azalpena, Erabiltzailea e) {
-        logger.log(Level.INFO, () -> String.format("\tMem:<%s> DB:<%s> => %n%s",
+        BetsLogger.log(Level.INFO, () -> String.format("\tMem:<%s> DB:<%s> => %n%s",
                 e, GertaerakBerreskuratuJDBC.getErabiltzaileaJDBC(e), azalpena));
     }
     
     public static void main(String[] args) {
         GertaerakSortu e = new GertaerakSortu();
-        logger.log(Level.INFO, "Gertaeren sorkuntza:");
+        BetsLogger.log(Level.INFO, "Gertaeren sorkuntza:");
         e.createAndStoreErabiltzailea("Ane", "125", "ikaslea");
         e.createAndStoreLoginGertaera("Ane", true, new Date());
         e.createAndStoreLoginGertaera("Ane", false, new Date());
-        logger.log(Level.INFO, "Gertaeren zerrenda:");
+        BetsLogger.log(Level.INFO, "Gertaeren zerrenda:");
         List<LoginGertaera> gertaerak = e.gertaerakZerrendatu();
         for (int i = 0; i < gertaerak.size(); i++) {
             LoginGertaera ev = gertaerak.get(i);
-            logger.log(Level.INFO, () -> String.format("Id: %s Deskribapena: %s Data: %s Login: %b",
+            BetsLogger.log(Level.INFO, () -> String.format("Id: %s Deskribapena: %s Data: %s Login: %b",
                     ev.getId(), ev.getDeskribapena(), ev.getData(), ev.isLogin()));
         }
     }

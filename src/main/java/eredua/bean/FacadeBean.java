@@ -1,7 +1,10 @@
 package eredua.bean;
 
+import java.util.logging.Level;
+
 import businessLogic.BLFacade;
 import businessLogic.BLFacadeImplementation;
+import eredua.BetsLogger;
 
 public class FacadeBean {
     
@@ -13,8 +16,8 @@ public class FacadeBean {
             facadeInterface = new BLFacadeImplementation();
         }
         catch (Exception e) {
-            System.out.println("FacadeBean: negozioaren logika sortzean errorea: "
-                    + e.getMessage());
+            BetsLogger.log(Level.SEVERE, String.format("FacadeBean: negozioaren logika sortzean errorea: %s",
+                    e.getMessage()));
         }
     }
     
