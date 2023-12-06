@@ -13,7 +13,7 @@ public class LoginGertaera {
     
     private Date data;
     private String deskribapena;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = Erabiltzailea.class, fetch = FetchType.EAGER)
     private Erabiltzailea erabiltzailea;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,7 +64,7 @@ public class LoginGertaera {
         this.login = login;
         String msg = this.login
                 ? "k ongi egin du logina"
-                : " ogin egiten saiatu da";
+                : " login egiten saiatu da";
         this.deskribapena = this.erabiltzailea.getIzena() + msg;
     }
     

@@ -147,5 +147,7 @@ public class GertaerakDataAccess {
         List<LoginGertaera> lg3 = e.getLoginGertaerakv3(erab.getIzena());
         BetsLogger.log(Level.INFO, () -> String.format("3.3.3 => %sren Login Gertareak: %s",
                 erab.getIzena(), lg3));
+        
+        BetsLogger.log(Level.INFO, () -> String.format("3.4 => %s", erab.getGertaerak()));
     }
 }
