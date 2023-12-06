@@ -38,4 +38,9 @@ public class Erabiltzailea {
     public void setPasahitza(String pasahitza) {
         this.pasahitza = pasahitza;
     }
+    
+    @Override
+    public String toString() {
+        return String.format("%s/%s/%s", this.izena, this.pasahitza, this.mota);
+    }
 }

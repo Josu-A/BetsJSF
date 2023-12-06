@@ -66,4 +66,9 @@ public class LoginGertaera {
                 : " ogin egiten saiatu da";
         this.deskribapena = this.erabiltzailea.getIzena() + msg;
     }
+    
+    @Override
+    public String toString() {
+        return String.format("%s/%s/%s/%s/%b", this.id, this.deskribapena, this.data, this.erabiltzailea, this.login);
+    }
 }
