@@ -1,4 +1,4 @@
-package eredua;
+package configuration;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,7 +21,8 @@ public class HibernateUtil {
 	private static SessionFactory buildSessionFactory() {
 		try {
             String configFilePath = "hibernate.cfg.xml";
-            Configuration conf = new Configuration().configure(new File(configFilePath));
+            //Configuration conf = new Configuration().configure(new File(configFilePath));
+            Configuration conf = new Configuration().configure();
             configuration = conf.configure();
 		    return configuration.buildSessionFactory();
 		}

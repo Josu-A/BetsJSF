@@ -11,9 +11,9 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
 
+import configuration.HibernateUtil;
 import configuration.UtilDate;
 import domain.*;
-import eredua.HibernateUtil;
 import exceptions.QuestionAlreadyExist;
 
 /**

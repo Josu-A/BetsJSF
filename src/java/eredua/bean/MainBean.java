@@ -12,6 +12,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import org.primefaces.event.SelectEvent;
 
 import businessLogic.BLFacade;
+import businessLogic.bean.FacadeBean;
 import domain.Event;
 import domain.Question;
 import exceptions.EventFinished;

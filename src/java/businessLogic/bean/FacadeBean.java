@@ -1,4 +1,4 @@
-package eredua.bean;
+package businessLogic.bean;
 
 //import java.util.logging.Level;
 

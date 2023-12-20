@@ -1,4 +1,4 @@
-package eredua;
+package configuration;
 
 import java.io.IOException;
 import java.util.function.Supplier;

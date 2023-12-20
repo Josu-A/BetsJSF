@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import configuration.HibernateUtil;
 import dataAccess.HibernateDataAccess;
 import domain.Question;
-import eredua.HibernateUtil;
 import domain.Event;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
