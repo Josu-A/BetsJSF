@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
+
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -12,18 +12,22 @@ import org.hibernate.cfg.Configuration;
 public class HibernateUtil {
 	
 	private static final SessionFactory sessionFactory = buildSessionFactory();
-	
+	private static Configuration configuration;
+
 	private HibernateUtil() {
 		throw new IllegalStateException("Utility class");
 	}
 	
 	private static SessionFactory buildSessionFactory() {
 		try {
-			String configFilePath = "src/hibernate.cfg.xml";
-			return new Configuration().configure(new File(configFilePath)).buildSessionFactory();
+            String configFilePath = "hibernate.cfg.xml";
+            Configuration conf = new Configuration().configure(new File(configFilePath));
+            configuration = conf.configure();
+		    return configuration.buildSessionFactory();
 		}
 		catch (HibernateException e) {
-			BetsLogger.log(Level.SEVERE, "Errorea SessionFactory sortzen.", e);
+		    System.err.println(e);
+			//BetsLogger.log(Level.SEVERE, "Errorea SessionFactory sortzen.", e);
 			return null;
 		}
 	}
@@ -35,6 +39,10 @@ public class HibernateUtil {
         }
         return r;
     }
+	
+	public static String getPropertyByName(String name) {
+	    return configuration.getProperty(name);
+	}
 	
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;

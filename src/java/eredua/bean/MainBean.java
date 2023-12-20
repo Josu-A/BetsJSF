@@ -4,8 +4,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Vector;
-import java.util.logging.Level;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -16,7 +14,6 @@ import org.primefaces.event.SelectEvent;
 import businessLogic.BLFacade;
 import domain.Event;
 import domain.Question;
-import eredua.BetsLogger;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
 
@@ -36,7 +33,8 @@ public class MainBean {
         this.facadeBL = FacadeBean.getBusinessLogic();
         gertaerak = this.facadeBL.getEvents(this.data);
         egunak = this.getEventsMonthStringArray();
-        BetsLogger.log(Level.INFO, egunak);
+        //BetsLogger.log(Level.INFO, egunak);
+        System.out.println(egunak);
     }
     
     public String galderaSortu() {
@@ -47,7 +45,7 @@ public class MainBean {
     				new FacesMessage("Galdera '" + g.getQuestion() + "/" + g.getBetMinimum() + "' ondo sortua"));
 		}
     	catch (EventFinished | QuestionAlreadyExist e) {
-    	    BetsLogger.log(Level.SEVERE, e.getMessage());
+    	    //BetsLogger.log(Level.SEVERE, e.getMessage());
     		e.printStackTrace();
     		FacesContext.getCurrentInstance().addMessage(null,
     				new FacesMessage(e.getMessage()));
@@ -77,7 +75,7 @@ public class MainBean {
     public String getEventsMonthStringArray() {
         StringBuilder bld = new StringBuilder();
         bld.append("[");
-        Vector<Date> tmp = this.facadeBL.getEvents();
+        List<Date> tmp = this.facadeBL.getEvents();
         for (int i = 0; i < tmp.size(); i++) {
             Date dI = tmp.get(i);
             Calendar calendar = Calendar.getInstance();
