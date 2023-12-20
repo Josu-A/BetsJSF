@@ -7,7 +7,12 @@
     version="2.0">
     <managed-bean>
         <managed-bean-name>Main</managed-bean-name>
-        <managed-bean-class>eredua.bean.MainBean</managed-bean-class>
+        <managed-bean-class>gui.bean.MainBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>Login</managed-bean-name>
+        <managed-bean-class>gui.bean.LoginBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <navigation-rule>
@@ -21,6 +26,10 @@
             <from-outcome>queryQuestions</from-outcome>
             <to-view-id>/QueryQuestions.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/Login.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <display-name>QueryQuestions</display-name>
@@ -33,6 +42,14 @@
     <navigation-rule>
         <display-name>CreateQuestions</display-name>
         <from-view-id>/CreateQuestions.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>main</from-outcome>
+            <to-view-id>/Main.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <display-name>Login</display-name>
+        <from-view-id>/Login.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>main</from-outcome>
             <to-view-id>/Main.xhtml</to-view-id>

@@ -1,4 +1,4 @@
-package eredua.bean;
+package gui.bean;
 
 import java.util.Calendar;
 import java.util.Date;
