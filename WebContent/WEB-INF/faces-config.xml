@@ -30,6 +30,10 @@
             <from-outcome>login</from-outcome>
             <to-view-id>/Login.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>showAllEvents</from-outcome>
+            <to-view-id>/ShowAllEvents.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <display-name>QueryQuestions</display-name>
@@ -50,6 +54,14 @@
     <navigation-rule>
         <display-name>Login</display-name>
         <from-view-id>/Login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>main</from-outcome>
+            <to-view-id>/Main.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <display-name>ShowAllEvents</display-name>
+        <from-view-id>/ShowAllEvents.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>main</from-outcome>
             <to-view-id>/Main.xhtml</to-view-id>

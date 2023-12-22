@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xml:lang="eu">
+<ui:composition>
+<f:view>
+    <h:form id="nireForm">
+        <div class="grid-container">
+            <div style="grid-column: span 2;">
+                <h:selectOneMenu id="gertaeraZerrenda" value="#{Main.gertaera}">
+                    <f:converter converterId="omnifaces.SelectItemsConverter" />
+                    <f:selectItems value="#{Main.gertaeraGuztiak}" />
+                    <f:ajax event="change" listener="#{Main.gertaeraListListener}"
+                            render="mezuak" />
+                </h:selectOneMenu>
+            </div>
+            <div class="mezuak">
+                <h:messages id="mezuak" />
+            </div>
+        </div>
+        <div class="back-buttons">
+            <h:commandButton value="#{Main.getBundleString('Close')}" action="main"
+                    immediate="true"/>
+        </div>
+    </h:form>
+</f:view>
+</ui:composition>
+</html>

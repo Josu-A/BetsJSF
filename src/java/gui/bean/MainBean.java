@@ -1,5 +1,6 @@
 package gui.bean;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +28,7 @@ public class MainBean {
     private Event gertaera;
     private Question galdera;
     private static List<Event> gertaerak;
+    private static List<Event> gertaeraGuztiak;
     private static List<Question> galderak;
     private static String egunak;
     
@@ -36,6 +38,13 @@ public class MainBean {
         egunak = this.getEventsMonthStringArray();
         //BetsLogger.log(Level.INFO, egunak);
         System.out.println(egunak);
+        
+        gertaeraGuztiak = new ArrayList<>();
+        List<Date> allEventDates = this.facadeBL.getEvents();
+        for (Date date : allEventDates) {
+            List<Event> eventsOnDate = this.facadeBL.getEvents(date);
+            gertaeraGuztiak.addAll(eventsOnDate);
+        }
     }
     
     public String galderaSortu() {
@@ -115,6 +124,11 @@ public class MainBean {
     }
     
     @SuppressWarnings("static-method")
+    public List<Event> getGertaeraGuztiak() {
+        return gertaeraGuztiak;
+    }
+    
+    @SuppressWarnings("static-method")
     public String getEgunak() {
         return egunak;
     }
@@ -179,6 +193,11 @@ public class MainBean {
     @SuppressWarnings("static-method")
     public void setGertaerak(List<Event> gL) {
         gertaerak = gL;
+    }
+
+    @SuppressWarnings("static-method")
+    public void setGertaeraGuztiak(List<Event> gG) {
+        gertaeraGuztiak = gG;
     }
     
     @SuppressWarnings("static-method")

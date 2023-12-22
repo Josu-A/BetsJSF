@@ -8,7 +8,32 @@
     xml:lang="eu">
 <ui:composition>
 <f:view>
-    <p>Placeholder</p>
+    <h:form id="nireForm">
+        <div class="grid-container">
+            <div class="input-container" style="margin-top: 2em;">
+                <label for="username">Username</label>
+                <h:inputText id="username" value="#{Login.username}" required="true"
+                        requiredMessage="Erabiltzaie izen bat sartu behar da.">
+                    <f:ajax execute="username" render="mezuak" />
+                </h:inputText>
+            </div>
+            <div class="input-container">
+                <label for="password">Password</label>
+                <h:inputSecret id="password" value="#{Login.password}" required="true"
+                        requiredMessage="Erabiltzaile pasahitza sartu behar da.">
+                    <f:ajax execute="password" render="mezuak" />
+                </h:inputSecret>
+            </div>
+            <div class="mezuak">
+                <h:messages id="mezuak" />
+            </div>
+        </div>
+        <div class="back-buttons">
+            <h:commandButton value="#{Main.getBundleString('Login')}" action="#{Login.attemptLogin}" />
+            <h:commandButton value="#{Main.getBundleString('Close')}" action="main"
+                    immediate="true"/>
+        </div>
+    </h:form>
 </f:view>
 </ui:composition>
 </html>
